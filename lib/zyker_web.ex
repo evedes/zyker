@@ -84,8 +84,8 @@ defmodule ZykerWeb do
 
       # HTML escaping functionality
       import Phoenix.HTML
-      # Core UI components
-      import ZykerWeb.CoreComponents
+      # Component library (lib/zyker_web/components/ui)
+      use ZykerWeb.UI
 
       # Common modules used in templates
       alias Phoenix.LiveView.JS

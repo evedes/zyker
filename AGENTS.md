@@ -8,6 +8,21 @@ Everything runs in containers for development; there is no host-side Elixir setu
 Before writing Elixir, Phoenix, LiveView, Ecto or HEEx code, read
 [PHOENIX_GUIDELINES.md](PHOENIX_GUIDELINES.md). This file wins where the two disagree.
 
+## UI and styling
+
+- Tailwind CSS v4 only, no daisyUI or other CSS frameworks. `assets/css/app.css` holds just the
+  Tailwind setup and the shadcn-style design tokens (`:root` light, `.dark` dark).
+- Components live in `lib/zyker_web/components/ui/` (one module per component group), imported
+  everywhere through `use ZykerWeb.UI`. There is no `core_components.ex`; where
+  PHOENIX_GUIDELINES.md mentions it, read `ZykerWeb.UI`.
+- Components look like [shadcn/ui](https://ui.shadcn.com) and are structured like
+  [Base UI](https://base-ui.com): `data-slot` on every part, state as `data-*`/ARIA attributes
+  styled with Tailwind variants, labels/descriptions/errors wired with `aria-describedby`.
+- Style with the semantic tokens only (`bg-primary`, `text-muted-foreground`, `border-input`, ...),
+  never raw palette colors, so dark mode keeps working.
+- Add every new component and variant to the dev showcase at `/dev/ui`
+  (`ZykerWeb.Dev.UILive`), plus tests in `test/zyker_web/components/`.
+
 ## Dev environment
 
 - `cp .env.example .env` once. `.env` is gitignored; `.env.example` is the committed template.

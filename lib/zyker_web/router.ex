@@ -37,6 +37,7 @@ defmodule ZykerWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
+      live "/ui", ZykerWeb.Dev.UILive
       live_dashboard "/dashboard", metrics: ZykerWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
