@@ -1,0 +1,19 @@
+FROM hexpm/elixir:1.20.4-erlang-29.0.6-debian-trixie-20261005-slim
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential git inotify-tools ca-certificates curl \
+  && rm -rf /var/lib/apt/lists/*
+
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} app && useradd -m -u ${UID} -g ${GID} app
+
+RUN mkdir -p /app && chown app:app /app
+USER app
+WORKDIR /app
+RUN mkdir -p /app/deps /app/_build
+ENV MIX_HOME=/home/app/.mix HEX_HOME=/home/app/.hex
+RUN mix local.hex --force && mix local.rebar --force
+
+EXPOSE 4000
+CMD ["sh", "-c", "mix deps.get && mix ecto.create && mix ecto.migrate && mix phx.server"]
