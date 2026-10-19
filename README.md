@@ -101,6 +101,42 @@ The components themselves live in `lib/zyker_web/components/ui/`.
 
 ---
 
+## `> extending`
+
+Build on zyker without forking it: make your own Phoenix app, add zyker as a Mix dependency and
+mount it. zyker keeps owning the repo, the endpoint and its routes; your app adds pages next to them.
+
+```elixir
+# mix.exs
+{:zyker, github: "evedes/zyker", branch: "main"}
+
+# config/config.exs: zyker's endpoint serves your router, and your static files before zyker's
+config :zyker, :web, router: MyAppWeb.Router, static_apps: [:my_app, :zyker]
+```
+
+```elixir
+defmodule MyAppWeb.Router do
+  use ZykerWeb, :router
+  require ZykerWeb.Routes
+
+  ZykerWeb.Routes.pipelines()      # :browser, :api
+
+  scope "/", MyAppWeb do
+    pipe_through :browser
+    get "/pricing", PricingController, :show   # yours come first, so they win
+  end
+
+  ZykerWeb.Routes.routes()         # everything zyker serves
+end
+```
+
+A dependency's `config/*.exs` is never loaded, so your app configures `:zyker` itself (repo,
+endpoint, mailer). For assets, import zyker's `assets/css/app.css` and `assets/js/app.js` from your
+own, and set `MIX_DEPS_PATH` to your deps folder for the heroicons plugin.
+`test/support/host_app.ex` is a minimal host that the test suite keeps working.
+
+---
+
 ## `> agent-native`
 
 This repo is written to be read by humans *and* models.

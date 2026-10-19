@@ -41,6 +41,16 @@ Before writing Elixir, Phoenix, LiveView, Ecto or HEEx code, read
 The app reads its DB settings from `DATABASE_*` and S3 settings from `S3_*` env vars
 (see `docker-compose-dev.yaml`). No S3 client library is wired in yet.
 
+## Host apps
+
+zyker can run as a Mix dependency inside another Phoenix app (see "extending" in README.md).
+That relies on `ZykerWeb.Routes` and on `config :zyker, :web` in `ZykerWeb.Endpoint`:
+
+- Add routes and pipelines in `ZykerWeb.Routes`, never directly in `ZykerWeb.Router`.
+- Keep these extension points generic: zyker never refers to a specific host app.
+- `test/zyker_web/routes_test.exs` mounts zyker from a stand-in host (`test/support/host_app.ex`);
+  keep it passing.
+
 ## Before committing
 
 Run `bin/dev exec app mix precommit` (warnings as errors, unused deps, format, tests)
