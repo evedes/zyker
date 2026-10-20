@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(flow approve:*)",
+      "Bash(flow pause:*)",
+      "Bash(flow resume:*)",
+      "Bash(flow abandon:*)",
+      "Edit(work/flow.json)",
+      "Edit(work/*/state.json)"
+    ]
+  }
+}

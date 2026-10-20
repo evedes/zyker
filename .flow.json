@@ -1,0 +1,22 @@
+{
+  "work_dir": "work",
+  "protected_paths": [
+    "lib/",
+    "test/",
+    "config/",
+    "priv/",
+    "assets/",
+    "mix.exs",
+    "mix.lock"
+  ],
+  "standing_gates": [
+    "mix compile --warnings-as-errors",
+    "mix format --check-formatted",
+    "mix test"
+  ],
+  "codegen": [
+    "\\bmix\\s+(phx|ecto)\\.gen\\.\\S",
+    "\\bmix\\s+igniter\\.\\S",
+    "\\bmix\\s+format\\b(?!.*--check-formatted)"
+  ]
+}
