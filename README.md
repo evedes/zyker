@@ -151,6 +151,13 @@ Point your agent at the repo and it already knows the way around.
 
 ---
 
+## `> license`
+
+[AGPL-3.0](LICENSE). Self-host it freely; if you run a modified zyker as a service, share your
+changes under the same license.
+
+---
+
 <div align="center">
 
 <sub>zyker.dev · made by <a href="https://github.com/evedes">@evedes</a></sub>
