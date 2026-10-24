@@ -31,6 +31,9 @@ defmodule ZykerWeb.TestHost do
     use ZykerWeb, :router
     require ZykerWeb.Routes
 
+    # Shadowing zyker's "/" is the point of this router; don't warn about it.
+    @compile :nowarn_nomatch
+
     ZykerWeb.Routes.pipelines()
 
     scope "/" do
