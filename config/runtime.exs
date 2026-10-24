@@ -101,19 +101,16 @@ if config_env() == :prod do
 
   # ## Configuring the mailer
   #
-  # In production you need to configure the mailer to use a different adapter.
-  # Here is an example configuration for Mailgun:
-  #
-  #     config :zyker, Zyker.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # Most non-SMTP adapters require an API client. Swoosh supports Req, Hackney,
-  # and Finch out-of-the-box. This configuration is typically done at
-  # compile-time in your config/prod.exs:
-  #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Req
-  #
-  # See https://swoosh.hexdocs.pm/Swoosh.html#module-installation for details.
+  # MAILER_ADAPTER picks the provider and the provider's own variable holds its key, e.g.
+  # MAILER_ADAPTER=resend with RESEND_API_KEY. Without it, mail stays on the Local adapter
+  # from config/config.exs and goes nowhere.
+  if mailer = Zyker.Mailer.config_from_env(System.get_env()) do
+    config :zyker, Zyker.Mailer, mailer
+  else
+    IO.puts(
+      :stderr,
+      "warning: MAILER_ADAPTER is not set; zyker will not deliver email " <>
+        "(supported: #{Enum.join(Zyker.Mailer.adapter_names(), ", ")})"
+    )
+  end
 end

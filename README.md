@@ -123,6 +123,22 @@ The components themselves live in `lib/zyker_web/components/ui/`.
 
 ---
 
+## `> mail`
+
+In prod, pick the provider with `MAILER_ADAPTER` and give it the provider's own key:
+
+| `MAILER_ADAPTER` | key variable       |
+|------------------|--------------------|
+| `resend`         | `RESEND_API_KEY`   |
+| `postmark`       | `POSTMARK_API_KEY` |
+| `sendgrid`       | `SENDGRID_API_KEY` |
+| `brevo`          | `BREVO_API_KEY`    |
+
+A missing key or an unknown adapter stops the release from booting. Leave `MAILER_ADAPTER` unset and
+zyker still boots, warns, and delivers no email.
+
+---
+
 ## `> extending`
 
 Build on zyker without forking it: make your own Phoenix app, add zyker as a Mix dependency and
@@ -153,7 +169,8 @@ end
 ```
 
 A dependency's `config/*.exs` is never loaded, so your app configures `:zyker` itself (repo,
-endpoint, mailer). For assets, import zyker's `assets/css/app.css` and `assets/js/app.js` from your
+endpoint, mailer). For the mailer, call `Zyker.Mailer.config_from_env(System.get_env())` from your
+`config/runtime.exs` to get the same `MAILER_ADAPTER` handling. For assets, import zyker's `assets/css/app.css` and `assets/js/app.js` from your
 own, and set `MIX_DEPS_PATH` to your deps folder for the heroicons plugin.
 `test/support/host_app.ex` is a minimal host that the test suite keeps working.
 
