@@ -1,0 +1,104 @@
+{
+  "id": "001-dep-patch-updates",
+  "title": "Update tailwind, plug_crypto and elixir_make past GitHub's header limit",
+  "phase": "ship",
+  "approvals": {
+    "spec": {
+      "hash": "3a102fa171dee814",
+      "at": "2026-10-24T19:23:57Z"
+    },
+    "tickets": {
+      "hash": "3bcd6d648cbc26fa",
+      "at": "2026-10-24T19:25:05Z"
+    }
+  },
+  "gates": {
+    "passed": true,
+    "fingerprint": "dfa5b9f940d3253b",
+    "at": "2026-10-24T19:28:14Z",
+    "results": [
+      {
+        "source": "standing",
+        "command": "mix compile --warnings-as-errors",
+        "exit": 0
+      },
+      {
+        "source": "standing",
+        "command": "mix format --check-formatted",
+        "exit": 0
+      },
+      {
+        "source": "standing",
+        "command": "mix test",
+        "exit": 0
+      },
+      {
+        "source": "T01-lock-updates",
+        "command": "grep -q '\"plug_crypto\": {:hex, :plug_crypto, \"2.2.1\"' mix.lock",
+        "exit": 0
+      },
+      {
+        "source": "T01-lock-updates",
+        "command": "grep -q '\"tailwind\": {:hex, :tailwind, \"0.5.2\"' mix.lock",
+        "exit": 0
+      },
+      {
+        "source": "T01-lock-updates",
+        "command": "grep -q '\"elixir_make\": {:hex, :elixir_make, \"0.10.1\"' mix.lock",
+        "exit": 0
+      },
+      {
+        "source": "T01-lock-updates",
+        "command": "mix hex.audit",
+        "exit": 0
+      },
+      {
+        "source": "T01-lock-updates",
+        "command": "mix assets.setup",
+        "exit": 0
+      },
+      {
+        "source": "T01-lock-updates",
+        "command": "sh -c 'export MIX_ENV=test; d=$(mktemp -d) && mix deps.clean lazy_html --build && ELIXIR_MAKE_CACHE_DIR=$d mix deps.compile lazy_html > $d/log 2>&1; s=$?; cat $d/log; [ $s = 0 ] && grep -q \"Downloading precompiled\" $d/log && ! grep -q \"Attempting to compile\" $d/log'",
+        "exit": 0
+      },
+      {
+        "source": "T02-ci-drop-cmake",
+        "command": "sh -c '! grep -q cmake .github/workflows/ci.yaml'",
+        "exit": 0
+      },
+      {
+        "source": "T02-ci-drop-cmake",
+        "command": "grep -q 'apt-get install -y --no-install-recommends build-essential git ca-certificates$' .github/workflows/ci.yaml",
+        "exit": 0
+      }
+    ]
+  },
+  "history": [
+    {
+      "phase": "explore",
+      "at": "2026-10-24T19:21:23Z"
+    },
+    {
+      "phase": "spec",
+      "at": "2026-10-24T19:21:45Z"
+    },
+    {
+      "phase": "tickets",
+      "at": "2026-10-24T19:24:03Z"
+    },
+    {
+      "phase": "build",
+      "at": "2026-10-24T19:25:10Z"
+    },
+    {
+      "phase": "review",
+      "at": "2026-10-24T19:28:21Z"
+    },
+    {
+      "phase": "ship",
+      "at": "2026-10-24T19:30:13Z"
+    }
+  ],
+  "reviewed_fingerprint": "dfa5b9f940d3253b"
+}

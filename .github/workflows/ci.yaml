@@ -28,7 +28,7 @@ jobs:
       DATABASE_HOST: db
 
     steps:
-      - run: apt-get update && apt-get install -y --no-install-recommends build-essential cmake git ca-certificates
+      - run: apt-get update && apt-get install -y --no-install-recommends build-essential git ca-certificates
 
       - uses: actions/checkout@v4
 
