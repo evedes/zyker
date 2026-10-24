@@ -1,7 +1,7 @@
 {
   "id": "002-env-mailer",
   "title": "Configure the production mailer from environment variables",
-  "phase": "ship",
+  "phase": "done",
   "approvals": {
     "spec": {
       "hash": "af2a997bd730b46a",
@@ -83,6 +83,10 @@
     {
       "phase": "ship",
       "at": "2026-10-24T20:38:07Z"
+    },
+    {
+      "phase": "done",
+      "at": "2026-10-24T20:39:12Z"
     }
   ],
   "reviewed_fingerprint": "55e4278f43a2e458"
