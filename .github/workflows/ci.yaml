@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # Same image as Dockerfile.dev, so CI and dev share Elixir/OTP versions.
+    container: hexpm/elixir:1.20.4-erlang-29.0.6-debian-trixie-20261005-slim
+
+    services:
+      db:
+        image: postgres:17.10
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      MIX_ENV: test
+      DATABASE_HOST: db
+
+    steps:
+      - run: apt-get update && apt-get install -y --no-install-recommends build-essential git ca-certificates
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: mix-${{ hashFiles('mix.lock') }}
+          restore-keys: mix-
+
+      - run: mix local.hex --force && mix local.rebar --force
+      - run: mix deps.get
+
+      # `mix precommit`, minus the steps that rewrite files instead of checking them.
+      - run: mix compile --warnings-as-errors
+      - run: mix deps.unlock --check-unused
+      - run: mix format --check-formatted
+      - run: mix test
