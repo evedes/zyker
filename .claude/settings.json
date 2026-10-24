@@ -5,8 +5,8 @@
       "Bash(flow pause:*)",
       "Bash(flow resume:*)",
       "Bash(flow abandon:*)",
-      "Edit(work/flow.json)",
-      "Edit(work/*/state.json)"
+      "Edit(flow/flow.json)",
+      "Edit(flow/*/state.json)"
     ]
   }
 }
