@@ -2,11 +2,13 @@
 
 <img src=".github/zyker.svg" alt="ZYKER" width="540">
 
-**`zyker.dev`** — black canvas. white type. nothing else.
+**`zyker.dev`** — the control plane for your team's AI SDLC.
 
-*an elixir-native app, built in the open, with an AI pair at the keyboard.*
+*self-host it, point a daemon at it from any unix box, ship.*
 
 <br>
+
+[![CI](https://github.com/evedes/zyker/actions/workflows/ci.yaml/badge.svg)](https://github.com/evedes/zyker/actions/workflows/ci.yaml)
 
 ![Elixir](https://img.shields.io/badge/elixir-1.20-000?style=for-the-badge&logo=elixir&logoColor=white)
 ![Phoenix](https://img.shields.io/badge/phoenix-1.8-000?style=for-the-badge&logo=phoenixframework&logoColor=white)
@@ -17,6 +19,26 @@
 ![Agents](https://img.shields.io/badge/agents-welcome-000?style=for-the-badge&logo=anthropic&logoColor=white)
 
 </div>
+
+---
+
+## `> what it is`
+
+zyker is a control plane that teams host to run code through their whole AI software development
+lifecycle, from the first idea to shipped code, with every step recorded and gated.
+
+Execution happens wherever the code lives. **[zyker-daemon](https://github.com/evedes/zyker-daemon)**
+ships alongside zyker: start it on any unix machine (a laptop, a VM, a CI runner, a box in your
+own network) and it connects to the control plane and runs the work there.
+
+| piece          | role                                                         |
+|----------------|--------------------------------------------------------------|
+| `zyker`        | the control plane: teams, work, gates, history. this repo    |
+| `zyker-daemon` | the executor: launches the flow on any unix machine          |
+| `zyker.dev`    | the hosted instance, for teams that would rather not run it  |
+
+> **status:** early. The foundation (stack, UI kit, extension points, CI) is in place; the
+> control plane itself is being built now, in the open.
 
 ---
 
