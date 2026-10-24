@@ -1,6 +1,6 @@
 # Standing agreement for zyker tickets
 
-Every ticket in `work/*/tickets/` inherits this. Tickets only state what is
+Every ticket in `flow/*/tickets/` inherits this. Tickets only state what is
 specific to them.
 
 ## Definition of Ready (`flow check` enforces the ticket sections)
@@ -19,7 +19,7 @@ specific to them.
 - Tests were written before the code they cover, from the acceptance criteria.
 - Behaviour was checked in the running app.
 - No out-of-scope surfaces touched; existing conventions followed.
-- Lands as one commit with its `work/` folder.
+- Lands as one commit with its `flow/` folder.
 
 ## Working agreement
 
