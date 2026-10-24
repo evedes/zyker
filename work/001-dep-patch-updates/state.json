@@ -1,7 +1,7 @@
 {
   "id": "001-dep-patch-updates",
   "title": "Update tailwind, plug_crypto and elixir_make past GitHub's header limit",
-  "phase": "ship",
+  "phase": "done",
   "approvals": {
     "spec": {
       "hash": "3a102fa171dee814",
@@ -98,6 +98,10 @@
     {
       "phase": "ship",
       "at": "2026-10-24T19:30:13Z"
+    },
+    {
+      "phase": "done",
+      "at": "2026-10-24T19:31:35Z"
     }
   ],
   "reviewed_fingerprint": "dfa5b9f940d3253b"
