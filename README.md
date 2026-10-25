@@ -183,7 +183,6 @@ This repo is written to be read by humans *and* models.
 | file                    | signal                                                            |
 |-------------------------|-------------------------------------------------------------------|
 | `AGENTS.md`             | the house rules: stack, dev loop, UI conventions, pre-commit ritual |
-| `CLAUDE.md`             | one line, `@AGENTS.md`, so Claude Code loads the rules on boot    |
 | `PHOENIX_GUIDELINES.md` | generic Phoenix 1.8 wisdom; read before touching Elixir           |
 
 Point your agent at the repo and it already knows the way around.
