@@ -18,5 +18,9 @@
     "\\bmix\\s+(phx|ecto)\\.gen\\.\\S",
     "\\bmix\\s+igniter\\.\\S",
     "\\bmix\\s+format\\b(?!.*--check-formatted)"
+  ],
+  "reset": [
+    "bin/dev run --rm -T app mix ecto.reset",
+    "(cd ../zyker-cloud && bin/dev run --rm -T app mix ecto.reset)"
   ]
 }
